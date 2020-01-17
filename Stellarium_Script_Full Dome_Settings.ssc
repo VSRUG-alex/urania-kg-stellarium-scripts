@@ -1,0 +1,69 @@
+//*************************************************
+// Declaratie variabelen (boolean types). 
+//*************************************************
+var On = false;
+var Off = false;
+var Pointer = false;
+var Art = false;
+var Zoom = false;
+
+//*************************************************
+// Locatie - coördinaten Urania.
+//*************************************************
+core.setObserverLocation(4.465, 51.144, 10, 0, "Hove(Urania)");
+
+//*************************************************
+// Windrichting onderaan het scherm 
+// N = 0° / O = 90° / Z = 180° / W = 270° 
+//*************************************************
+var Azimuth = 0;
+
+//****************************************
+// Fisheye mode
+//****************************************
+core.setProjectionMode("ProjectionFisheye");
+core.moveToAltAzi(10, Azimuth, 0);
+core.wait(0.1);
+Altitude = 89;
+core.moveToAltAzi(Altitude, Azimuth, 0);
+FOV = 180;
+StelMovementMgr.zoomTo(FOV, 0);
+core.wait(0.1);
+
+//*************************************************
+// Verwijder alle eigen helpteksten
+//*************************************************
+LabelMgr.deleteAllLabels();
+
+//*************************************************
+// Reset selectObjectByName
+//*************************************************
+core.setSkyCulture("inuit");
+core.setSkyCulture("western");
+
+//*************************************************
+// Sterrenbeelden: Wel lijnen, geen labels 
+// >> geldig enkel voor de selectie.
+// Object Selectie -> Toon geen extra info
+// Sterren -> Geen labels
+// Zonnestelsel -> Geen labels.
+//*************************************************
+ConstellationMgr.setFlagIsolateSelected(true); 
+core.setSelectedObjectInfo("None");
+StarMgr.setFlagLabels(false);
+SolarSystem.setFlagLabels(false);
+
+//*************************************************
+// Sterren - Relatieve grootte
+//         - Grensmagnitude
+//*************************************************
+StelSkyDrawer.setRelativeStarScale(0.4);
+MagnitudeLimit = 6;
+StelSkyDrawer.setCustomStarMagnitudeLimit(MagnitudeLimit);
+StelSkyDrawer.setFlagStarMagnitudeLimit(true);
+
+//*************************************************
+// Visuele schaal v/d Maan.
+//*************************************************
+SolarSystem.setFlagMoonScale(true);
+SolarSystem.setMoonScale(6);
