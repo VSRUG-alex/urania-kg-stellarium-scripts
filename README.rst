@@ -18,18 +18,12 @@ Gebruik
 #. open het script "`Stellarium_V_20200102.ssc`" (icoontje linksboven)
 #. klik op het start icoontje ("run script") rechtsboven
 
-Bestanden
-+++++++++
+Documentatie
+++++++++++++
 
-Momenteel vind je volgende bestanden die je kan gebruiken ter inspiratie.
+Zie `docs`_
 
-`Documentatie_Functies.docx`:
------------------------------
-
-Legt uit hoe de functies moeten worden aangeroepen.
-
-`Stellarium_Setup_ENTER to continue script.docx`:
--------------------------------------------------
+.. _docs: docs/
 
 Hoe ervoor te zorgen dat je ENTER of een muis-presenter kan gebruiken om vooruit te stappen in je script.
 

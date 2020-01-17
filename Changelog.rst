@@ -4,6 +4,11 @@ Change log
 
 .. contents ::
 
+current
+-------
+
+- documentatie omgezet naar ReStructuredText
+
 1.1 - 2020-01-17
 ----------------
 
