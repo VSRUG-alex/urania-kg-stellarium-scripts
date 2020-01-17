@@ -13,22 +13,23 @@ Procedure
 
 Start Stellarium op. Met de functietoets `F1` krijg je ondestaand Help-venster te zien.
 
-.. image:: doc/img/key1.png
+.. image:: img/keys1.png
 
 
 Klik op de “Edit keyboard shortcuts” knop.
+
 *OPGELET*: Afhankelijk van de versie kan deze knop ook onderaan het Help-venster staan
 
 Je krijgt dan volgend venster.
 
-.. image:: doc/img/key2.png
+.. image:: img/keys2.png
 
 
 
 Blader verder tot je de lijn “Hervat uitvoeren van ...” te zien krijgt.
 Selecteer deze lijn.
 
-.. image:: doc/img/key3.png
+.. image:: img/keys3.png
 
 
 
@@ -38,10 +39,10 @@ Druk op de ENTER (RETURN) toets. Het woordje Return verschijnt dan in het vak va
 
 
 
-Opmerking: Druk je op een verkeerde toets, of druk je per ongeluk tweemaal op de ENTER toets, dan kan je dat nog altijd terugzetten met de “undo” knop, net achter het in te vullen vakje.
+*Opmerking*: Druk je op een verkeerde toets, of druk je per ongeluk tweemaal op de ENTER toets, dan kan je dat nog altijd terugzetten met de “undo” knop, net achter het in te vullen vakje.
 
 Vergeet niet op de knop “Pas toe” te drukken om de wijziging op te slaan.
 Je krijgt dan uiteindelijk dit:
 
-.. image:: doc/img/key4.png
+.. image:: img/keys4.png
 

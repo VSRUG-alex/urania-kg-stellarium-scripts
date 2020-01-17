@@ -2,7 +2,7 @@
 Stellarium scripting binnen de sterrenwacht
 ===========================================
 
-.. contents:: 
+.. contents:: Overzicht
 .. sectnum::
 
 Dit is een eerste versie van Koen Geuken's Stellarium scripts.
