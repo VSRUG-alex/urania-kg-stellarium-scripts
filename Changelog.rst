@@ -20,3 +20,11 @@ Change log
 
 - eerste gepubliceerde versie
 
+
+TODO
+----
+
+- maan bug?
+- `include` gebruiken; afsplitsen van functies en programma 
+- uitleggen hoe lokale scripts kunnen gecombineerd worden met de API
+
