@@ -48,49 +48,6 @@ ArtDuration:
     • De duur dat de sterrenbeeldfiguren getoond worden.
     • Uitgedrukt in een aantal seconden (te schrijven zonder quotes). Is de duur gelijk aan 999 dan blijft het script wachten tot je het weer activeert.
 
-Script:
-(lijnen voorafgegaan met // zijn commentaarlijnen)
-
-::
-
-	function toonSterrenbeeld(Name, Selection, Duration, Art, ArtDuration)
-		{ if(Selection == "Start" ||  Selection == "One")
-			{ ConstellationMgr.setFlagLines(true); 
-	//  ConstellationMgr.setFlagLabels(true)
-			} 
-
-		  core.selectObjectByName(Name, false);
-		  core.wait(Duration);
-
-	       if(Duration == 999)
-		    { core.pauseScript();
-		    }
-		  else
-		    { core.wait(ArtDuration);
-		    }
-
-	 	  if(Art == true)
-			{ ConstellationMgr.setFlagArt(true); 
-		     if(ArtDuration == 999)
-			    { core.pauseScript();
-			    }
-			  else
-			    { core.wait(ArtDuration);
-			    }
-			  ConstellationMgr.setFlagArt(false); 
-			} 
-
-	 	  if(Selection == "End" ||  Selection == "One")
-			{ ConstellationMgr.setFlagLines(false); 
-	       //  ConstellationMgr.setFlagLabels(false);
-			  core.selectObjectByName("", false);  // Does not work
-			  // Trick to reset the selectObjectByName 
-			  core.setSkyCulture("inuit") ;
-			  core.setSkyCulture("western") ;
-			} 
-
-		}
-
 Opmerkingen:
     • In het begin wordt bij “Start” en “One” de setting ConstellationMgr.setFlagLines geactiveerd. Eerst bij “End” of “One” wordt deze setting gedesactiveerd.
     • De setting ConstellationMgr.setFlagLabels werd in commentaar gezet. Men opteerde om geen labels (de namen van de sterrenbeelden) te tonen.
@@ -163,46 +120,6 @@ Duration2
     • OPGELET: Dit getal moet minstens gelijk zijn aan de waarde van ZoomDuration. Indien beide gelijk, dan wordt onmiddellijk na het inzoomen weer terug het normale beeld gegeven. Indien groter, dan wordt het verschil in seconden nog gewacht vooraleer terug te keren naar het gewone scherm.
     • Is de waarde gelijk aan 999, dan wacht het script op een gebruikersactie om weer verder te gaan.
 
-
-Script:
-(lijnen voorafgegaan met // zijn commentaarlijnen)
-::
-
-	function toonObject(Name, Pointer, Duration1, Zoom, ZoomFOV, ZoomDuration, Duration2)
-		{ core.selectObjectByName(Name, Pointer);
-		   if(Duration1 == 999)
-		     { core.pauseScript();
-		     }
-		else
-		     { core.wait(Duration1);
-		     }	  // Gaat inzoomen (FOV / Duration). 
-		  
-	  if(Zoom == true)
-		   { StelSkyDrawer.setFlagStarMagnitudeLimit(false);
-	StelMovementMgr.setFlagTracking(true); 
-			StelMovementMgr.zoomTo (ZoomFOV, ZoomDuration); 
-		   if(Duration2 == 999)
-			  { core.pauseScript();
-			  }
-			else
-			  { core.wait(Duration2);
-			  }
-
-		   StelSkyDrawer.setFlagStarMagnitudeLimit(true);
-	// Uitzoomen tot volledig fisheye zicht 
-	StelMovementMgr.zoomTo(FOV,0); 
-	StelMovementMgr.setFlagTracking(false); 
-			// Met het zuiden onderaan het scherm. 
-
-			core.moveToAltAzi(Altitude, Azimuth, 0); 
-		   }
-
-		  core.selectObjectByName("", false); 
-		  // Trick to reset the selectObjectByName 
-		  core.setSkyCulture("inuit") ;
-		  core.setSkyCulture("western") ;
-		}
-
 Opmerkingen:
     • Bij het inzoomen wordt de (eventuele) beperking op grensmagnitude uitgeschakeld. Mocht deze bijvoorbeeld op vier staan, dan krijg je bij het inzoomen weinig tot geen sterren te zien. Waardoor het effect een beetje verloren gaat.
     • Tracking moet geactiveerd worden, zo blijft het ingezoomde object centraal in beeld staan.
@@ -257,26 +174,6 @@ T1 t.e.m. T10:
         ◦ “Sterrenbeelden Dierenriem worden getoond”
     • 
 
-
-Script:
-(lijnen voorafgegaan met // zijn commentaarlijnen)
-
-::
-
-	function toonHelp(T1, T2, T3, T4, T5, T6, T7, T8, T9, T10)
-		{ LabelMgr.deleteAllLabels();    // Vorige teksten verwijderen
-		  id = LabelMgr.labelScreen(T1, 100, 100, true, 20);
-		  id = LabelMgr.labelScreen(T2, 100, 130, true, 20);
-		  id = LabelMgr.labelScreen(T3, 100, 160, true, 20);
-		  id = LabelMgr.labelScreen(T4, 100, 190, true, 20);
-		  id = LabelMgr.labelScreen(T5, 100, 220, true, 20);
-		  id = LabelMgr.labelScreen(T6, 100, 250, true, 20);
-		  id = LabelMgr.labelScreen(T7, 100, 280, true, 20);
-		  id = LabelMgr.labelScreen(T8, 100, 310, true, 20);
-		  id = LabelMgr.labelScreen(T9, 100, 340, true, 20);
-		  id = LabelMgr.labelScreen(T10, 100, 370, true, 20);
-		}
-
 Voorbeelden:
     • toonHelp("Grote Beer",
          "Kleine Beer",
@@ -312,17 +209,6 @@ Date:
     • Een tijd uitgedrukt in het formaat YYYY-MM-DDTHH:MM:SS
     • Voorbeeld:
         ◦ date = "2019-08-16T17:00:00"
-
-Script:
-
-
-::
-
-	function startRotation(rate, date)
-		{ core.setTimeRate(rate);
-		         core.waitFor(date, "local");
-		  core.setTimeRate(1);
-		}
 
 Voorbeelden:
     • datum = “2019-09-18T23:00:00;
