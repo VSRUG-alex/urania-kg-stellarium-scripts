@@ -9,7 +9,7 @@ Hier vind je de uitleg rond de scripts.
 Dit script bestaat uit twee grote blokken:
 
 #. het eerste deel is een oneindige lus waarin een reeks verschijnselen op datum via de nieuwe functies worden aangeroepen, telkens met een pauze en uitleg. Illustreert het gebruik van de functies. Maakt onder meer gebruik van de huidige maanfase om afwisseling te brengen in het programma.
-#. het tweede deel bevat 5 functies die je in je eigen scripts kan gebruiken:
+#. het tweede deel bevat 5 functies (voor meer uitleg, zie `API`_) die je in je eigen scripts kan gebruiken:
 
    - `toonSterrenbeeld()` - inzoomen op een sterrenbeeld
    - `toonObject()` - inzoomen op een object
@@ -30,3 +30,4 @@ Zie ook
 - http://stellarium.org/en/docs.html
 - http://stellarium.org/doc/head/scripting.html
 
+.. _API: ../doc
