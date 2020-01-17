@@ -3,7 +3,7 @@ Hier vind je de uitleg rond de scripts.
 .. contents :: Overzicht
 .. sectnum ::
 
-`Stellarium_V_20200102.ssc`:
+`Sterrenwacht_programma.ssc`:
 ----------------------------
 
 Dit script bestaat uit twee grote blokken:
@@ -17,7 +17,7 @@ Dit script bestaat uit twee grote blokken:
    - `getMaanFase()` - hulpfuctie, berekent de fase van de Maan (NM=1/EK=2/VM=3/LK=4) ifv datum (2020, bevat mogelijk nog een bug)
    - `toonHelp()` - hulpfunctie, voornamelijk bedoeld voor full domes (bv. Urania) (tekst wordt in de linker bovenhoek getoond maar verschijnt niet op de full dome)
 
-`Stellarium_Script_Full Dome_Settings.ssc`:
+`Full_Dome_Settings.ssc`:
 -------------------------------------------
 
 Deze script is specifiek voor Urania en stelt Stellarium in op Fisheye mode e.d.
@@ -26,7 +26,7 @@ Deze script is specifiek voor Urania en stelt Stellarium in op Fisheye mode e.d.
 Zie ook
 -------
 
-- Stellarium User Guid (SUG) - Part III - 16. Scripting
+- Stellarium User Guide (SUG) - Part III - 16. Scripting
 - http://stellarium.org/en/docs.html
 - http://stellarium.org/doc/head/scripting.html
 
