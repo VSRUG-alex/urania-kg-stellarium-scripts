@@ -24,6 +24,7 @@ Change log
 TODO
 ----
 
+- attributions/software licentie toevoegen - https://en.wikipedia.org/wiki/Software_license, https://www.gnu.org/licenses/
 - maan bug?
 - `include` gebruiken; afsplitsen van functies en programma 
 - uitleggen hoe lokale scripts kunnen gecombineerd worden met de API

@@ -21,8 +21,9 @@ Gebruik
 
 #. desgewenst, volg de instructies (`documentatie`_) om ENTER en/of PG UP te kunnen gebruiken om door de script te stappen
 #. in Stellarium, druk F12 om de "script console" dialoog te openen
-#. open het script "`Stellarium_V_20200102.ssc`" (icoontje linksboven)
+#. open het script "`Sterrenwacht_programma.ssc`" (icoontje linksboven)
 #. klik op het start icoontje ("run script") rechtsboven
+#. de script doorloopt een selectie van astromische onderwerpen en stopt telkens. om naar het volgende ondewerp te gaan gebruik je ENTER (zie `documentatie`_) of anders `Ctrl-D R`.
 
 Documentatie
 ++++++++++++
