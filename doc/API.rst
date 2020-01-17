@@ -315,7 +315,9 @@ Date:
 
 Script:
 
+
 ::
+
 	function startRotation(rate, date)
 		{ core.setTimeRate(rate);
 		         core.waitFor(date, "local");

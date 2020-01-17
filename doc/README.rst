@@ -1,9 +1,10 @@
-Hier vind je de documentatie rond de scripts.
+Hier vind je de `API`_ documentatie: hoe de functies aanroepen.
 
 - `enter`_ legt uit hoe de scripts te gebruiken met behulp van een muispointer
-- `API docs`_ legt uit hoe de functies worden aangeroepen
+- `API doc`_ legt uit hoe de functies worden aangeroepen
 
 
 .. _enter: ./enter.rst
-.. _API docs: ./API.rst
+.. _API doc: ./API.rst
+.. _API: https://en.wikipedia.org/wiki/Application_programming_interface
 
