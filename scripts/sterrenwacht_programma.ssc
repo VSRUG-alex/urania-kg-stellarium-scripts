@@ -719,7 +719,7 @@ function getMaanFase(date)
 	while(stopLoop);
 
 	// Bereken testdatum (datum maanfase - 4 dagen)
-	dateMfdt = "2019-" + dateMfdtMD + "T00:00:00";
+	dateMfdt = "2020" + dateMfdtMD + "T00:00:00";
 	core.setDate(dateMfdt);
 	core.setDate("-4 days");
 	dateMfdt = core.getDate();
