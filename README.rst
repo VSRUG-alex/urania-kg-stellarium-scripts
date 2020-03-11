@@ -34,5 +34,5 @@ Documentatie
 
 Zie `documentatie`_.
 
-.. _documentatie: ../doc/
+.. _documentatie: doc/
 

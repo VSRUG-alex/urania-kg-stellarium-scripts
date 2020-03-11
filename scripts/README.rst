@@ -3,7 +3,7 @@ Hier vind je de uitleg rond de scripts.
 .. contents :: Overzicht
 .. sectnum ::
 
-`Sterrenwacht_programma.ssc`:
+`common.ssc`:
 ----------------------------
 
 Dit script bevat 5 functies (voor meer uitleg, zie `API`_) die je in je eigen scripts kan gebruiken:

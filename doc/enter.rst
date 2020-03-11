@@ -8,7 +8,7 @@ In het script wordt veelvuldig gebruik gemaakt van het commando “core.pause”
 Met onderstaande procedure wordt de ENTER (of RETURN) toets als alternatief toegevoegd.
 Wil je met een Powerpoint presenter werken, dan moet je de toets PgDown voorzien i.p.v. ENTER.
 
-.. warning:: Opgelet! Hiermee ontregelt je veel functies van Stellarium, zoals de zoekfunctie (F3 of Ctrl-F)
+.. warning:: Opgelet! Hiermee ontregel je veel functies van Stellarium, zoals de zoekfunctie (F3 of Ctrl-F)
 
 Procedure
 ---------
