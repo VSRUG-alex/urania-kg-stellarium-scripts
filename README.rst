@@ -5,16 +5,20 @@ Stellarium scripting binnen de sterrenwacht
 .. contents:: Overzicht
 .. sectnum::
 
-Dit is een eerste versie van Koen Geuken's Stellarium scripts.
+Dit is een tweede versie van Koen Geuken's Stellarium scripts.
 
 Deze scripts laten toe om een presentatie in Stellarium op een eenvoudige manier te programmeren.
 
 Scripts
 +++++++
 
-In de folder `scripts`_ vind je de Stellarium scripts.
+In de folder `scripts`_ vind je Stellarium routines die gebruikt worden in je eigen scripts.
 
 .. _scripts: scripts/
+
+In de folder `org`_ vind je voorbeelden in gebruik bij verschillende sterrenwachten. Hieruit kan je zowel inspiratie putten als delen.
+
+.. _org: org/
 
 Gebruik
 +++++++
@@ -30,5 +34,5 @@ Documentatie
 
 Zie `documentatie`_.
 
-.. _documentatie: doc/
+.. _documentatie: ../doc/
 

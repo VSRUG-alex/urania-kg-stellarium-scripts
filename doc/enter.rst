@@ -3,12 +3,12 @@
 Inleiding
 ---------
 
-In het script wordt veelvuldig gebruik gemaakt van het commando “core.pause”. Om het pauzeren te beëindigen, moet default volgende toetsencombinatie gebruikt worden: CTRL + D, gevolgd door R.
+In het script wordt veelvuldig gebruik gemaakt van het commando “core.pause”. Om het pauzeren te beëindigen, moet standaard volgende toetsencombinatie gebruikt worden: `CTRL + D, gevolgd door R`.
 
 Met onderstaande procedure wordt de ENTER (of RETURN) toets als alternatief toegevoegd.
-Wil je met een powerpoint presenter werken, dan moet je de toets PgDown voorzien i.p.v. ENTER.
+Wil je met een Powerpoint presenter werken, dan moet je de toets PgDown voorzien i.p.v. ENTER.
 
-.. warning:: Opgelet! Hiermee ontregelt je bepaalde functies van Stellarium, zoals de zoekfunctie (F3 of Ctrl-F)
+.. warning:: Opgelet! Hiermee ontregelt je veel functies van Stellarium, zoals de zoekfunctie (F3 of Ctrl-F)
 
 Procedure
 ---------
@@ -18,7 +18,7 @@ Start Stellarium op. Met de functietoets `F1` krijg je ondestaand Help-venster t
 .. image:: img/keys1.png
 
 
-Klik op de “Edit keyboard shortcuts” knop.
+Klik op de “Edit keyboard shortcuts” knop (of druk `F7`).
 
 *OPGELET*: Afhankelijk van de versie kan deze knop ook onderaan het Help-venster staan
 

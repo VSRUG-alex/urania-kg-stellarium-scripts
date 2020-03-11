@@ -1,3 +1,5 @@
+include("../../scripts/common.ssc");
+
 //*************************************************
 // Declaratie variabelen (boolean types). 
 //*************************************************
@@ -8,17 +10,18 @@ var Art = false;
 var Zoom = false;
 
 //*************************************************
-// Locatie - coördinaten Urania.
+// Locatie - coÃ¶rdinaten Urania.
 //*************************************************
 core.setObserverLocation(4.465, 51.144, 10, 0, "Hove(Urania)");
 
 //*************************************************
 // Windrichting onderaan het scherm 
-// N = 0° / O = 90° / Z = 180° / W = 270° 
+// N = 0Â° / O = 90Â° / Z = 180Â° / W = 270Â° 
 //*************************************************
 // Met onderstaande azimuth valt het noorden in 
 // het planetarium gelijk met het noorden v/d ZKP
 //*************************************************
+
 var Azimuth = 11;
 
 //****************************************
@@ -93,6 +96,8 @@ while (loop == 1) {
 datum = datumSave;
 
 //----------------------------------------------------------------
+
+
 
 //*************************************************
 // datum & datumMorgen / ymd & ymdMorgen
@@ -571,183 +576,4 @@ core.pauseScript();
 
 
 ///////// ///////// EINDE ///////// ///////// 
-
-
-//------------------------------------------------------------------------------------
-//-- FUNCTIES  PLEASE DO NOT CHANGE --------------------------------------------------
-//------------------------------------------------------------------------------------
-
-function toonSterrenbeeld(Name, Selection, Duration, Art, ArtDuration)
- 	{ if(Selection == "Start" ||  Selection == "One")
-		{ ConstellationMgr.setFlagLines(true); 
-//		  ConstellationMgr.setFlagLabels(true)
-		} 
-	  core.selectObjectByName(Name, false);
-          if(Duration == 999)
-	    { core.pauseScript();
-	    }
-	  else
-	    { core.wait(Duration);
-	    }
- 	  if(Art == true)
-		{ ConstellationMgr.setFlagArt(true); 
-                  if(ArtDuration == 999)
-		    { core.pauseScript();
-		    }
-		  else
-		    { core.wait(ArtDuration);
-		    }
-		  ConstellationMgr.setFlagArt(false); 
-		} 
- 	  if(Selection == "End" ||  Selection == "One")
-		{ ConstellationMgr.setFlagLines(false); 
-//		  ConstellationMgr.setFlagLabels(false);
-		  core.selectObjectByName("", false);  // Does not work
-		  // Trick to reset the selectObjectByName 
-		  core.setSkyCulture("inuit") ;
-		  core.setSkyCulture("western") ;
-		} 
-
-	}
-
-//------------------------------------------------------------------------------------
-function toonObject(Name, Pointer, Duration1, Zoom, ZoomFOV, ZoomDuration, Duration2)
-	{ core.selectObjectByName(Name, Pointer);
-	   if(Duration1 == 999)
-	     { core.pauseScript();
-	     }
-	     else
-	     { core.wait(Duration1);
-	     }
-	  // Gaat inzoomen (FOV / Duration). 
-	  if(Zoom == true)
-		{ StelSkyDrawer.setFlagStarMagnitudeLimit(false);
-		  StelMovementMgr.setFlagTracking(true); 
-		  StelMovementMgr.zoomTo (ZoomFOV, ZoomDuration); 
-                  if(Duration2 == 999)
-		    { core.pauseScript();
-		    }
-		  else
-		    { core.wait(Duration2);
-		    }
-                  StelSkyDrawer.setFlagStarMagnitudeLimit(true);
-		  // Uitzoomen tot volledig fisheye zicht 
-		  StelMovementMgr.zoomTo(FOV,0); 
-		  StelMovementMgr.setFlagTracking(false); 
-		  // Met het zuiden onderaan het scherm. 
-		  core.moveToAltAzi(Altitude, Azimuth, 0); 
-		}
-	  core.selectObjectByName("", false); 
-	  // Trick to reset the selectObjectByName 
-	  core.setSkyCulture("inuit") ;
-	  core.setSkyCulture("western") ;
-	}
-
-//------------------------------------------------------------------------------------
-function toonHelp(T1, T2, T3, T4, T5, T6, T7, T8, T9, T10)
-	{ LabelMgr.deleteAllLabels();
-	  id = LabelMgr.labelScreen(T1, 100, 100, true, 20);
-	  id = LabelMgr.labelScreen(T2, 100, 130, true, 20);
-	  id = LabelMgr.labelScreen(T3, 100, 160, true, 20);
-	  id = LabelMgr.labelScreen(T4, 100, 190, true, 20);
-	  id = LabelMgr.labelScreen(T5, 100, 220, true, 20);
-	  id = LabelMgr.labelScreen(T6, 100, 250, true, 20);
-	  id = LabelMgr.labelScreen(T7, 100, 280, true, 20);
-	  id = LabelMgr.labelScreen(T8, 100, 310, true, 20);
-	  id = LabelMgr.labelScreen(T9, 100, 340, true, 20);
-	  id = LabelMgr.labelScreen(T10, 100, 370, true, 20);
-	}
-//------------------------------------------------------------------------------------
-function startRotation(rate, date)
-	{ core.setTimeRate(rate);
-          core.waitFor(date, "local");
-          core.setTimeRate(1);
-	}
-
-//------------------------------------------------------------------------------------
-function getMaanFase(date)
-{
-	// Maanfase Datums voor 2020
-	var mfdt = [ "00-00","01-03","01-10","01-17",
-		     "01-24","02-02","02-09","02-15",
-		     "02-23","03-02","03-09","03-16",
-		     "03-24","04-01","04-08","04-15",
-		     "04-23","04-30","05-07","05-14",
-		     "05-22","05-30","06-05","06-13",
-		     "06-21","06-28","07-05","07-13",
-		     "07-20","07-27","08-03","08-11",
-		     "08-19","08-25","09-02","09-10",
-		     "09-17","09-24","10-01","10-10",
-		     "10-16","10-23","10-31","11-08",
-		     "11-15","11-22","11-30","12-08",
-		     "12-14","12-22","12-30"];
-	// Corresponderende maanfase
-	var mf = ["NM","EK","VM","LK",
-                  "NM","EK","VM","LK",
-                  "NM","EK","VM","LK",
-                  "NM","EK","VM","LK",
-                  "NM","EK","VM","LK",
-                  "NM","EK","VM","LK",
-                  "NM","EK","VM","LK",
-                  "NM","EK","VM","LK",
-                  "NM","EK","VM","LK",
-                  "NM","EK","VM","LK",
-                  "NM","EK","VM","LK",
-                  "NM","EK","VM","LK",
-                  "NM","EK","VM"];
-	
-	// Save huidige datum/tijd - ophalen 'mm-dd'
-	dateSave = core.getDate();
-	dateMD = date.substring(5,10);
-	// Zoek maanfase vlak voor de opgegeven datum	
-	var stopLoop = new Boolean(false);
-	i = 0; 
-	dateMfdtMD = "NULL";
-	do
-	{
-	  if (mfdt[i] <= dateMD)
-	    {
-	        i++;
-	    }
-	  if (mfdt[i] > dateMD)
-	    {
-	        dateMfdtMD = mfdt[i];
-	        stopLoop = false;
-     	    }
-
-	}
-	while(stopLoop);
-
-	// Bereken testdatum (datum maanfase - 4 dagen)
-	dateMfdt = "2020" + dateMfdtMD + "T00:00:00";
-	core.setDate(dateMfdt);
-	core.setDate("-4 days");
-	dateMfdt = core.getDate();
-	core.setDate(dateSave);
-
-	// Bepaal de maanfase
-	if(date < dateMfdt)
-	{  fase = mf[i-1];
-	}
-	else
-	{  fase = mf[i];
-	}
-	
-	//Test maanfase en bepaal de returnwaarde
-	if(fase == "NM")
-	{  return 0;
-	}
-	else if(fase == "EK")
-	{  return 1;
-	}
-	else if(fase == "VM")
-	{  return 2;
-	}
-	else if(fase == "LK")
-	{  return 3;
-	}
-	return null;
-}
-
-
 

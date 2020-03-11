@@ -1,0 +1,755 @@
+include("../../scripts/common.ssc");
+
+//*************************************************
+// Declaratie variabelen (boolean types). 
+//*************************************************
+var On = false;
+var Off = false;
+var Pointer = false;
+var Art = false;
+var Zoom = false;
+
+//*************************************************
+// Locatie - coördinaten Urania.
+//*************************************************
+core.setObserverLocation(4.465, 51.144, 10, 0, "Hove(Urania)");
+
+//*************************************************
+// Windrichting onderaan het scherm 
+// N = 0° / O = 90° / Z = 180° / W = 270° 
+//*************************************************
+// Met onderstaande azimuth valt het noorden in 
+// het planetarium gelijk met het noorden v/d ZKP
+//*************************************************
+var Azimuth = 11;
+
+//****************************************
+// Fisheye mode
+//****************************************
+core.setProjectionMode("ProjectionFisheye");
+core.moveToAltAzi(10, Azimuth, 0);
+core.wait(0.1); //Wachten om het script wat tijd te geven
+Altitude = 89;
+core.moveToAltAzi(Altitude, Azimuth, 0);
+FOV = 180;
+StelMovementMgr.zoomTo(FOV, 0);
+core.wait(0.1);  //Wachten om het script wat tijd te geven
+
+//*************************************************
+// Verwijder alle eigen helpteksten
+//*************************************************
+LabelMgr.deleteAllLabels();
+
+//*************************************************
+// Reset selectObjectByName
+//*************************************************
+core.setSkyCulture("inuit");
+core.setSkyCulture("western");
+
+//*************************************************
+// Sterrenbeelden: Wel lijnen, geen labels 
+// >> geldig enkel voor de selectie.
+// Object Selectie -> Toon geen extra info
+// Sterren -> Geen labels
+// Zonnestelsel -> Geen labels.
+//*************************************************
+ConstellationMgr.setFlagIsolateSelected(true); 
+core.setSelectedObjectInfo("None");
+StarMgr.setFlagLabels(false);
+SolarSystem.setFlagLabels(false);
+
+//*************************************************
+// Sterren - Relatieve grootte
+//         - Grensmagnitude
+//*************************************************
+StelSkyDrawer.setRelativeStarScale(0.4);
+MagnitudeLimit = 6;
+StelSkyDrawer.setCustomStarMagnitudeLimit(MagnitudeLimit);
+StelSkyDrawer.setFlagStarMagnitudeLimit(true);
+
+//*************************************************
+// Meteoren activiteit
+//*************************************************
+SporadicMeteorMgr.setZHR(40);
+SporadicMeteorMgr.setFlagShow(true);
+
+//*************************************************
+// Visuele schaal v/d Maan.
+//*************************************************
+SolarSystem.setFlagMoonScale(true);
+SolarSystem.setMoonScale(6);
+
+//*************************************************
+// Bepaal de maanfase:
+// 0 = NM, 1 = EK, 2 = VM, 3 = NM
+//*************************************************
+datumSave = core.getDate("local");
+maanFase = getMaanFase(datumSave);
+core.debug(datumSave);
+
+//*************************************************
+// Eeuwigdurende loop (CTRL Q om te stoppen)
+//*************************************************
+loop = 1;
+while (loop == 1) {
+datum = datumSave;
+
+//----------------------------------------------------------------
+
+//*************************************************
+// datum & datumMorgen / ymd & ymdMorgen
+//*************************************************
+core.setDate(datum, "local");
+core.setDate("+1 days");
+datumMorgen = core.getDate("local");
+core.setDate(datum, "local");
+ymd = datum.substring(0,10);
+ymdMorgen = datumMorgen.substring(0,10);
+
+if (datum.substring(11,13) > 17)
+   { datum = ymd + "T15:00:00";
+     core.setDate(datum, "local");
+   }
+
+
+toonHelp("PAUZE",
+         "PageDown (of CTRL D + R)",
+         "Doordraaien naar 17u30",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "");
+core.pauseScript();
+
+//----------------------------------------------------------------
+
+toonHelp("Draait tot 17u30",
+         "Gevolgd door PAUZE",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "");
+
+datum = ymd + "T17:30:00";
+startRotation(2000, datum);
+
+toonHelp("PAUZE",
+         "PageDown (of CTRL D + R)",
+         "Venus",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "");
+
+core.pauseScript();
+
+//----------------------------------------------------------------
+
+toonHelp("Venus (Z)",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "");
+
+toonObject("Venus", true, 3, true, 0.02, 5, 999);
+
+//****************************************
+// Check Maanfase
+//****************************************
+if (maanFase == 1)
+     {  toonHelp("PAUZE",
+		 "Gebruik CTRL D + R (of ENTER)",
+		 "Inzoomen op de Maan",
+		 "",
+		 "",
+		 "",
+	         "",
+		 "",
+		 "",
+		 "");
+
+	core.pauseScript();
+
+	toonHelp("Maan + Zoom",
+		 "Gevolgd door PAUZE",	
+		 "",
+		 "",
+		 "",
+		 "",
+		 "",
+		 "",
+		 "",
+		 "");
+       toonObject("Moon", true, 2, true, 5, 10, 999);
+     }
+
+
+toonHelp("PAUZE",
+         "PageDown (of CTRL D + R)",
+         "Doordraaien naar 20 uur",
+         "Start daarna met Grote Beer, ...",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "");
+
+core.pauseScript();
+
+//----------------------------------------------------------------
+
+toonHelp("Doordraaien 20 uur",
+	 "Grote Beer",
+         "Kleine Beer",
+         "Cassiopeia (P)",
+         "Alles KUNST",
+         "Gevolgd door PAUZE",
+         "",
+         "",
+         "",
+         "");
+
+//*************************************************
+// Toon sterrenbeelden
+//*************************************************
+toonSterrenbeeld("Ursa Major", "Start", 0, false, 0);
+toonSterrenbeeld("Ursa Minor", "", 0, false, 0);
+toonSterrenbeeld("Cassiopeia", "", 0, false, 0);
+
+datum = ymd + "T20:00:00";
+startRotation(2000, datum);
+core.pauseScript();
+
+toonSterrenbeeld("Cassiopeia", "", 0, true, 999);
+
+toonHelp("PAUZE",
+         "PageDown (of CTRL D + R)",
+         "Pegasus & Andromeda",
+         "Kunst(P)",
+         "Pegasus - M15 (Z)(P)",
+         "Androm - M31 (Z)(P)",
+         "",
+         "",
+         "",
+         "");
+
+core.pauseScript();
+
+//----------------------------------------------------------------
+
+toonHelp("Pegasus & Andromeda",
+         "Kunst(P)",
+         "Pegasus - M15 (Z)(P)",
+         "Androm - M31 (Z)(P)",
+         "Doordraaien 22u",
+         "",
+         "",
+         "",
+         "",
+         "");
+
+toonSterrenbeeld("Cepheus", "", 0, false, 0);
+toonSterrenbeeld("Andromeda", "", 0, false, 0);
+toonSterrenbeeld("Pegasus", "", 999, true, 999);
+
+core.pauseScript();
+toonSterrenbeeld("Pegasus", "End", 0, false, 0);
+
+toonSterrenbeeld("Pegasus", "One", 999, false, 0);
+toonObject("M15", true, 3, true, 0.4, 5, 999);
+
+toonSterrenbeeld("Andromeda", "One", 999, false, 0);
+toonObject("M31", true, 3, true, 4.5, 10, 999);
+
+
+datum = ymd + "T22:00:00";
+startRotation(2000, datum);
+
+toonSterrenbeeld("Orion", "Start",  0, false, 0);
+toonSterrenbeeld("Taurus", "",  0, false, 0);
+toonSterrenbeeld("Gemini", "",  0, false, 0);
+toonSterrenbeeld("Canis Major", "", 0, false, 0);
+toonSterrenbeeld("Canis Minor", "", 0, false, 0);
+
+toonHelp("PAUZE",
+         "PageDown (of CTRL D + R)",
+         "Orion, Taurus, Gemini",
+         "Kleine/Grote Hond",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "");
+
+core.pauseScript();
+
+//----------------------------------------------------------------
+
+toonHelp("Orion Stier Tweelingen",
+         "Kleine/Grote Hond",
+         "(Kunst)",
+         "Orion + M42 (Z)",
+         "Stier + M45 (Z)",
+         "",
+         "",
+         "",
+         "",
+         "");
+
+toonSterrenbeeld("Gemini", "",  0, true, 999);
+toonSterrenbeeld("Gemini", "End",  0, false, 0);
+
+toonSterrenbeeld("Orion", "One",  999, false, 0);
+toonObject("M42", true, 3, true, 2.5, 10, 999);
+
+toonSterrenbeeld("Taurus", "One",  999, false, 0);
+toonObject("M45", true, 3, true, 2, 10, 999);
+
+
+toonSterrenbeeld("Orion", "Start",  0, false, 0);
+toonSterrenbeeld("Taurus", "",  0, false, 0);
+toonSterrenbeeld("Ursa Major", "",  0, false, 0);
+
+toonHelp("PAUZE",
+         "PageDown (of CTRL D + R)",
+         "Betelgeuze",
+         "Grote Beer / M97",
+         "Stier / M1",
+         "",
+         "",
+         "",
+         "",
+         "");
+
+core.pauseScript();
+
+//----------------------------------------------------------------
+
+toonHelp("Betelgeuze",
+         "Grote Beer / M97",
+         "Uilnevel (Z) (P)",
+         "Stier / M1",
+         "Krabnevel (Z) (P)",
+         "",
+         "",
+         "",
+         "",
+         "");
+
+toonSterrenbeeld("Orion", "End", 0, false, 0);
+core.selectObjectByName("Betelgeuse", true);
+core.pauseScript();
+core.selectObjectByName("Betelgeuze", false)
+toonSterrenbeeld("Orion", "End",  0, false, 0);
+
+toonSterrenbeeld("Ursa Major", "One", 999, false, 0);
+toonObject("M97", true, 3, true, 0.5, 10, 999);
+
+toonSterrenbeeld("Taurus", "One", 999, false, 0);
+toonObject("M1", true, 3, true, 0.4, 10, 999);
+
+toonHelp("PAUZE",
+         "PageDown (of CTRL D + R)",
+         "Dierenriem",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "");
+
+core.pauseScript();
+
+//----------------------------------------------------------------
+
+toonHelp("Vissen  23/02 - 22/03",
+         "Ram     22/03 - 22/04",
+	 "Stier   22/04 - 22/05",
+	 "Tweel   22/05 - 22/06",
+	 "Kreeft  22/06 - 22/07",
+	 "Leeuw   22/07 - 22/08",
+	 "Maagd   22/08 - 22/09",
+	 "Weegsch 22/09 - 22/10",
+         "(P)/ KUNST",
+         "Gevolgd door PAUZE");
+
+//*************************************************
+// Dierenriem
+//*************************************************
+toonSterrenbeeld("Pisces", "Start", 0, false, 0);
+toonSterrenbeeld("Aries", "", 0, false, 0);
+toonSterrenbeeld("Taurus", "", 0, false, 0);
+toonSterrenbeeld("Gemini", "", 0, false, 0);
+toonSterrenbeeld("Cancer", "", 0, false, 0);
+toonSterrenbeeld("Leo", "", 0, false, 0);
+toonSterrenbeeld("Virgo", "", 0, false, 0);
+toonSterrenbeeld("Libra", "", 999, true, 999);
+
+//GridLinesMgr.setFlagEclipticLine(true);
+//core.pauseScript();
+//GridLinesMgr.setFlagEclipticLine(false);
+
+//****************************************
+// Check Maanfase
+//****************************************
+if (maanFase == 2)
+     {  toonHelp("PAUZE",
+		 "Gebruik CTRL D + R (of ENTER)",
+		 "Draaien naar middernacht",
+		 "Inzoomen op de Maan",
+		 "",
+		 "",
+	         "",
+		 "",
+		 "",
+		 "");
+
+	core.pauseScript();
+
+	toonHelp("Middernacht",
+		 "Maan + Zoom",	
+		 "Gevolgd door PAUZE",
+		 "",
+		 "",
+		 "",
+		 "",
+		 "",
+		 "",
+		 "");
+
+	core.selectObjectByName("Polaris", true);
+	datum = ymdMorgen + "T00:01:00";
+	startRotation(1000, datum);
+	core.pauseScript();
+	toonSterrenbeeld("Libra", "End",  0, false, 0);
+	toonObject("Moon", true, 2, true, 5, 10, 999);
+
+	toonSterrenbeeld("Pisces", "Start",  0, false, 0);
+	toonSterrenbeeld("Aries", "",  0, false, 0);
+	toonSterrenbeeld("Taurus", "",  0, false, 0);
+	toonSterrenbeeld("Gemini", "",  0, false, 0);
+	toonSterrenbeeld("Cancer", "",  0, false, 0);
+	toonSterrenbeeld("Leo", "",  0, false, 0);
+	toonSterrenbeeld("Virgo", "",  0, false, 0);
+	toonSterrenbeeld("Libra", "",  0, false, 0);
+     }
+
+toonHelp("PAUZE",
+         "PageDown (of CTRL D + R)",
+         "Doordraaien naar 05u45",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "");
+
+core.pauseScript();
+
+//----------------------------------------------------------------
+
+toonHelp("Doordraaien naar 05u45",
+         "(met stop Dierenriem)",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "");
+
+core.selectObjectByName("Polaris", true);
+
+datum = ymdMorgen + "T05:45:00";
+startRotation(2000, datum);
+
+toonSterrenbeeld("Libra", "",  999, true, 999);
+toonSterrenbeeld("Libra", "End",  0, false, 0);
+
+
+//****************************************
+// Check Maanfase
+//***************************************
+if (maanFase == 3)
+      { toonHelp("PAUZE",
+		 "Gebruik CTRL D + R (of ENTER)",
+		 "Inzoomen op de Maan",
+		 "",
+		 "",
+		 "",
+		 "",
+		 "",
+		 "",
+		 "");
+
+	core.pauseScript();
+
+	toonHelp("Maan + Zoom",
+		 "Gevolgd door PAUZE",	
+	         "",
+	         "",
+	         "",
+	         "",
+	         "",
+	         "",
+	         "",
+	         "");
+	  toonObject("Moon", true, 2, true, 5, 10, 999);
+	}
+
+toonHelp("PAUZE",
+         "PageDown (of CTRL D + R)",
+	 "Mars",
+         "Zonsopkomst",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "");
+
+core.pauseScript();
+
+//----------------------------------------------------------------
+
+toonHelp("Mars (Z)(P)",
+         "Zonsopkomst",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "");
+
+datum = ymdMorgen + "T06:30:00";
+startRotation(1000, datum);
+toonObject("Mars", true, 999, true, 0.02, 10, 999);
+
+datum = ymdMorgen + "T10:00:00";
+startRotation(1000, datum);
+
+toonHelp("PAUZE",
+         "",
+         "PageDown (of CTRL D + R)",
+         ">> Script start opnieuw",
+         "",
+         "CTRL Q (ev. 2x)",
+         ">> om te stoppen",
+         "",
+         "",
+         "");
+
+core.pauseScript();
+
+//----------------------------------------------------------------
+
+//*************************************************
+// Afsluiten loop statement (while ...)
+//*************************************************
+
+  }
+
+
+///////// ///////// EINDE ///////// ///////// 
+
+
+//------------------------------------------------------------------------------------
+//-- FUNCTIES  PLEASE DO NOT CHANGE --------------------------------------------------
+//------------------------------------------------------------------------------------
+
+function toonSterrenbeeld(Name, Selection, Duration, Art, ArtDuration)
+ 	{ if(Selection == "Start" ||  Selection == "One")
+		{ ConstellationMgr.setFlagLines(true); 
+//		  ConstellationMgr.setFlagLabels(true)
+		} 
+	  core.selectObjectByName(Name, false);
+          if(Duration == 999)
+	    { core.pauseScript();
+	    }
+	  else
+	    { core.wait(Duration);
+	    }
+ 	  if(Art == true)
+		{ ConstellationMgr.setFlagArt(true); 
+                  if(ArtDuration == 999)
+		    { core.pauseScript();
+		    }
+		  else
+		    { core.wait(ArtDuration);
+		    }
+		  ConstellationMgr.setFlagArt(false); 
+		} 
+ 	  if(Selection == "End" ||  Selection == "One")
+		{ ConstellationMgr.setFlagLines(false); 
+//		  ConstellationMgr.setFlagLabels(false);
+		  core.selectObjectByName("", false);  // Does not work
+		  // Trick to reset the selectObjectByName 
+		  core.setSkyCulture("inuit") ;
+		  core.setSkyCulture("western") ;
+		} 
+
+	}
+
+//------------------------------------------------------------------------------------
+function toonObject(Name, Pointer, Duration1, Zoom, ZoomFOV, ZoomDuration, Duration2)
+	{ core.selectObjectByName(Name, Pointer);
+	   if(Duration1 == 999)
+	     { core.pauseScript();
+	     }
+	     else
+	     { core.wait(Duration1);
+	     }
+	  // Gaat inzoomen (FOV / Duration). 
+	  if(Zoom == true)
+		{ StelSkyDrawer.setFlagStarMagnitudeLimit(false);
+		  StelMovementMgr.setFlagTracking(true); 
+		  StelMovementMgr.zoomTo (ZoomFOV, ZoomDuration); 
+                  if(Duration2 == 999)
+		    { core.pauseScript();
+		    }
+		  else
+		    { core.wait(Duration2);
+		    }
+                  StelSkyDrawer.setFlagStarMagnitudeLimit(true);
+		  // Uitzoomen tot volledig fisheye zicht 
+		  StelMovementMgr.zoomTo(FOV,0); 
+		  StelMovementMgr.setFlagTracking(false); 
+		  // Met het zuiden onderaan het scherm. 
+		  core.moveToAltAzi(Altitude, Azimuth, 0); 
+		}
+	  core.selectObjectByName("", false); 
+	  // Trick to reset the selectObjectByName 
+	  core.setSkyCulture("inuit") ;
+	  core.setSkyCulture("western") ;
+	}
+
+//------------------------------------------------------------------------------------
+function toonHelp(T1, T2, T3, T4, T5, T6, T7, T8, T9, T10)
+	{ LabelMgr.deleteAllLabels();
+	  id = LabelMgr.labelScreen(T1, 100, 100, true, 20);
+	  id = LabelMgr.labelScreen(T2, 100, 130, true, 20);
+	  id = LabelMgr.labelScreen(T3, 100, 160, true, 20);
+	  id = LabelMgr.labelScreen(T4, 100, 190, true, 20);
+	  id = LabelMgr.labelScreen(T5, 100, 220, true, 20);
+	  id = LabelMgr.labelScreen(T6, 100, 250, true, 20);
+	  id = LabelMgr.labelScreen(T7, 100, 280, true, 20);
+	  id = LabelMgr.labelScreen(T8, 100, 310, true, 20);
+	  id = LabelMgr.labelScreen(T9, 100, 340, true, 20);
+	  id = LabelMgr.labelScreen(T10, 100, 370, true, 20);
+	}
+//------------------------------------------------------------------------------------
+function startRotation(rate, date)
+	{ core.setTimeRate(rate);
+          core.waitFor(date, "local");
+          core.setTimeRate(1);
+	}
+
+//------------------------------------------------------------------------------------
+function getMaanFase(date)
+{
+	// Maanfase Datums voor 2020
+	var mfdt = [ "00-00","01-03","01-10","01-17",
+		     "01-24","02-02","02-09","02-15",
+		     "02-23","03-02","03-09","03-16",
+		     "03-24","04-01","04-08","04-15",
+		     "04-23","04-30","05-07","05-14",
+		     "05-22","05-30","06-05","06-13",
+		     "06-21","06-28","07-05","07-13",
+		     "07-20","07-27","08-03","08-11",
+		     "08-19","08-25","09-02","09-10",
+		     "09-17","09-24","10-01","10-10",
+		     "10-16","10-23","10-31","11-08",
+		     "11-15","11-22","11-30","12-08",
+		     "12-14","12-22","12-30"];
+	// Corresponderende maanfase
+	var mf = ["NM","EK","VM","LK",
+                  "NM","EK","VM","LK",
+                  "NM","EK","VM","LK",
+                  "NM","EK","VM","LK",
+                  "NM","EK","VM","LK",
+                  "NM","EK","VM","LK",
+                  "NM","EK","VM","LK",
+                  "NM","EK","VM","LK",
+                  "NM","EK","VM","LK",
+                  "NM","EK","VM","LK",
+                  "NM","EK","VM","LK",
+                  "NM","EK","VM","LK",
+                  "NM","EK","VM"];
+	
+	// Save huidige datum/tijd - ophalen 'mm-dd'
+	dateSave = core.getDate();
+	dateMD = date.substring(5,10);
+	// Zoek maanfase vlak voor de opgegeven datum	
+	var stopLoop = new Boolean(false);
+	i = 0; 
+	dateMfdtMD = "NULL";
+	do
+	{
+	  if (mfdt[i] <= dateMD)
+	    {
+	        i++;
+	    }
+	  if (mfdt[i] > dateMD)
+	    {
+	        dateMfdtMD = mfdt[i];
+	        stopLoop = false;
+     	    }
+
+	}
+	while(stopLoop);
+
+	// Bereken testdatum (datum maanfase - 4 dagen)
+	dateMfdt = "2020" + dateMfdtMD + "T00:00:00";
+	core.setDate(dateMfdt);
+	core.setDate("-4 days");
+	dateMfdt = core.getDate();
+	core.setDate(dateSave);
+
+	// Bepaal de maanfase
+	if(date < dateMfdt)
+	{  fase = mf[i-1];
+	}
+	else
+	{  fase = mf[i];
+	}
+	
+	//Test maanfase en bepaal de returnwaarde
+	if(fase == "NM")
+	{  return 0;
+	}
+	else if(fase == "EK")
+	{  return 1;
+	}
+	else if(fase == "VM")
+	{  return 2;
+	}
+	else if(fase == "LK")
+	{  return 3;
+	}
+	return null;
+}
+
+
+

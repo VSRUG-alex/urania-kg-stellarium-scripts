@@ -7,6 +7,7 @@ Change log
 master
 -----
 
+- refactoring
 - maafase bug
 
 1.0.2 - 2020-01-17

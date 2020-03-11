@@ -137,7 +137,7 @@ Voorbeelden:
     • Het ingezoomde beeld blijft dan nog eens 15 seconden staan. De laatste functieparameter heeft dan wel een waarde van 30, je moet er de zoomtijd van aftrekken. Met andere woorden de laatste hoeveelheid seconden moet minstens gelijk zijn aan de tijd voor het inzoomen, zoniet wordt het inzoomen vroegtijdig afgebroken.
     • toonSterrenbeeld("Orion", "One", 10, false, 0);
 toonObject("M42", true, 10, true, 3.3, 10, 30);
-    • Toont eerst het sterrenbeeld Orion m.b.v. de sterrenbeeldlijnen. Deze verdwijnen om dan in te zoommen op de Orionnevel.
+    • Toont eerst het sterrenbeeld Orion m.b.v. de sterrenbeeldlijnen. Deze verdwijnen om dan in te zoomen op de Orionnevel.
     • toonSterrenbeeld("Orion", "End", 10, false, 0);
 toonObject("M42", true, 5, true, 3.3, 10, 999);
     • Het toonSterrenbeeld statement zorgt ervoor m.b.v. “End” dat eerder geselecteerde sterrenbeelden niet meer op het scherm getoond worden.
