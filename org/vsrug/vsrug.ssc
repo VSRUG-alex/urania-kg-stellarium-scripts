@@ -1,0 +1,142 @@
+include("../../scripts/common.ssc");
+core.debug("start");
+core.quit();
+
+/*
+
+VSRUG playlist 2020-03-11
+
+*/
+
+//*************************************************
+// Locatie - coördinaten VSRUG
+//*************************************************
+core.setObserverLocation(4.465, 51.144, 34, 0, "VSRUG-scripting (Gent)");
+
+
+//*************************************************
+// Declaratie variabelen (boolean types). 
+//*************************************************
+var On = false;
+var Off = false;
+var Pointer = false;
+var Art = false;
+var Zoom = false;
+
+var Azimuth = 180;
+
+// "P" tonen en wachten
+function wacht()
+{
+	toonHelp(
+		"P",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		""
+	)
+	core.pauseScript();
+}
+
+//*************************************************
+// Reset selectObjectByName
+//*************************************************
+//core.setSkyCulture("inuit");
+core.setSkyCulture("western");
+
+//*************************************************
+// Sterrenbeelden: Wel lijnen, geen labels 
+// >> geldig enkel voor de selectie.
+// Object Selectie -> Toon geen extra info
+// Sterren -> Geen labels
+// Zonnestelsel -> Geen labels.
+//*************************************************
+ConstellationMgr.setFlagIsolateSelected(true); 
+core.setSelectedObjectInfo("None");
+StarMgr.setFlagLabels(false);
+SolarSystem.setFlagLabels(false);
+
+//*************************************************
+// Sterren - Relatieve grootte
+//         - Grensmagnitude
+//*************************************************
+StelSkyDrawer.setRelativeStarScale(0.4);
+MagnitudeLimit = 6;
+StelSkyDrawer.setCustomStarMagnitudeLimit(MagnitudeLimit);
+StelSkyDrawer.setFlagStarMagnitudeLimit(true);
+
+//*************************************************
+// Visuele schaal v/d Maan.
+//*************************************************
+SolarSystem.setFlagMoonScale(true);
+SolarSystem.setMoonScale(6);
+
+//*************************************************
+// Bepaal de maanfase:
+// 0 = NM, 1 = EK, 2 = VM, 3 = NM
+//*************************************************
+datumSave = core.getDate("local");
+maanFase = getMaanFase(datumSave);
+core.debug(datumSave);
+
+dag = "2020-03-11";
+//avond = string.concat(dag, "T21:00:00")
+avond = dag + "T21:00:00";
+
+
+loop = 1;
+while (loop == 1) {
+datum = datumSave;
+
+	startRotation(2000, avond);
+
+	// zonsondergang
+	// maan
+	// ISS
+	// bright sats
+	// Venus
+	toonObject("Venus", true, 3, true, 0.02, 5, 999);
+	wacht();
+
+	// PannSTARSS T2
+
+	// sterren
+	// Orion
+	toonSterrenbeeld (“Orion”, “One”, 5, true, 10);
+	wacht();
+
+	// 	48 σ Ori
+	// CVn
+	// 	12 α2 CVn
+	// 	Struve 1702
+	// 	M94
+	// Gemini
+	// 	NGC2392
+	// Draco
+	toonSterrenbeeld (“Draco”, “One”, 5, true, 10);
+	wacht();
+	//	NGC 6543
+	// M42
+	toonObject("M42", true, 3, true, 0.02, 5, 999);
+	wacht();
+	// M1
+	// M45
+	// NGC 869+884
+	// M35
+	// M44 - M67
+	// M37
+	// M3
+	// M53
+	// M81+82
+	// M51
+	// M94
+	// M65+66 NGC3628
+
+}
+
+
